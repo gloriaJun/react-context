@@ -21,3 +21,12 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# ide
+.idea/
+.vscode/
+*.iml
+
+# lock
+yarn.lock
+package.lock.json
