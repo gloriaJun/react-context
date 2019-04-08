@@ -55,17 +55,25 @@ const Button = styled.button`
 const NotificationPresenter = ({ id, text, seen }) => (
   <Notification seen={seen}>
     <Flex alignCenter justifyBetween>
-      <Title>
-        <Store.Consumer>{store => store.message}</Store.Consumer>
-      </Title>
+      <Title>{text}</Title>
       <FlexItem>
         <React.Fragment>
-          <Button success seen={seen} onClick={() => {}}>
-            <FontAwesome name="check" />
-          </Button>
-          <Button danger seen={seen} onClick={() => {}}>
-            <FontAwesome name="times" />
-          </Button>
+          <Store.Consumer>
+            {store => (
+              <React.Fragment>
+                <Button success seen={seen} onClick={() => store.seeNotification(id)}>
+                  <FontAwesome name="check" />
+                </Button>
+                <Button
+                  danger
+                  seen={seen}
+                  onClick={() => store.deleteNotification(id)}
+                >
+                  <FontAwesome name="times" />
+                </Button>
+              </React.Fragment>
+            )}
+          </Store.Consumer>
         </React.Fragment>
       </FlexItem>
     </Flex>

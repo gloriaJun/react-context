@@ -3,16 +3,50 @@ import AppPresenter from './AppPresenter';
 import Store from '../../store';
 
 export default class AppContainer extends React.Component {
-  state = {
-    message: 'Hello',
-  };
-
-  componentDidMount() {
-    setTimeout(() => {
-      this.setState({
-        message: 'Bye'
+  constructor(props) {
+    super(props);
+    this._deleteNotification = (id) => {
+      this.setState(curState => {
+        const newState = delete curState.notifications[id];
+        return newState;
       });
-    }, 2000);
+    };
+
+    this._seeNotification = (id) => {
+      this.setState(curState => {
+        return {
+          ...curState,
+          notifications: {
+            ...curState.notifications,
+            [id]: {
+              ...curState.notifications[id],
+              seen: true,
+            }
+          }
+        }
+      });
+    }
+    this.state = {
+      notifications: {
+        '1': {
+          id: 1,
+          text: 'Something',
+          seen: false,
+        },
+        '2': {
+          id: 2,
+          text: 'Something else',
+          seen: false,
+        },
+        '3': {
+          id: 3,
+          text: 'Something els but different',
+          seen: false,
+        },
+      },
+      deleteNotification: this._deleteNotification,
+      seeNotification: this._seeNotification,
+    };
   }
 
   render() {
