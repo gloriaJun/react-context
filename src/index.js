@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import App from './components/App';
+// import App from './App';
 
 import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
